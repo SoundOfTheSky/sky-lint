@@ -1,11 +1,11 @@
 {
   "name": "@softsky/configs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SoundOfTheSky's configs",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SoundOfTheSky/sky-lint.git"
+    "url": "git+https://github.com/SoundOfTheSky/configs.git"
   },
   "keywords": [
     "linter",
@@ -19,9 +19,9 @@
   "author": "SoundOfTheSky",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SoundOfTheSky/sky-lint/issues"
+    "url": "https://github.com/SoundOfTheSky/configs/issues"
   },
-  "homepage": "https://github.com/SoundOfTheSky/sky-lint#readme",
+  "homepage": "https://github.com/SoundOfTheSky/configs#readme",
   "dependencies": {
     "@eslint/js": "^9.14.0",
     "@types/eslint__js": "^8.42.3",

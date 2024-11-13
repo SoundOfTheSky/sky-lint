@@ -1,16 +1,14 @@
-# sky-lint
+# @softsky/configs
 Collection of configs and linters that I use in my projects.
 
 ## Installation
-1. `git clone`
-2. In this folder: `npm link`
-3. In your target project: `npm link sky-lint -D`
+`npm i -D @softsky/configs`
   
 ## ESLint
 Create `eslint.config.mjs` and put
 ```js
 // @ts-check
-import skyEslintConfig from 'sky-lint/eslint.config.mjs';
+import skyEslintConfig from '@softsky/configs/eslint.config.mjs';
 
 /** @type {import("typescript-eslint").Config} */
 export default [
@@ -29,9 +27,10 @@ export default [
 Create `tsconfig.json` and put 
 ```json
 {
-  "extends": "sky-lint/tsconfig.json"
+  "extends": "@softsky/configs/tsconfig.json"
 }
 ```
+Also you can use `@softsky/configs/tsconfig-emit.json` to enable TSC emitting build.
 ### Features:
 - Latest syntax support (no transposing)
 - `./src` is base directory
@@ -41,7 +40,7 @@ Create `tsconfig.json` and put
 Create `prettier.config.mjs` and put
 ```js
 // @ts-check
-import skyPrettierConfig from 'sky-lint/prettier.config.mjs';
+import skyPrettierConfig from '@softsky/configs/prettier.config.mjs';
 
 /** @type {import("prettier").Config} */
 export default {...skyPrettierConfig};
@@ -58,7 +57,7 @@ Create `stylelint.config.mjs` and put
 
 /** @type {import("stylelint").Config} */
 export default {
-  extends: ['sky-lint/stylelint.config.mjs'],
+  extends: ['@softsky/configs/stylelint.config.mjs'],
 };
 ```
 ### Features
