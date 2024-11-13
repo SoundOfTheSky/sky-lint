@@ -1,6 +1,6 @@
 {
   "name": "@softsky/configs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "SoundOfTheSky's configs",
   "main": "index.js",
   "repository": {
