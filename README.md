@@ -19,8 +19,9 @@ export default [
 ### Features
 - Very strict
 - TypeScript
-- Prettier
+- Stylistic
 - Unused imports
+- Import order
 - Unicorn
 
 ## TSConfig

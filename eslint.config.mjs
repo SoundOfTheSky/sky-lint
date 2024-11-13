@@ -1,22 +1,24 @@
 // @ts-check
 
 import eslint from '@eslint/js';
+import StylisticPlugin from '@stylistic/eslint-plugin';
 import * as importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import unusedImports from 'eslint-plugin-unused-imports';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   eslint.configs.recommended,
-  // sonarjs.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
-  eslintPluginPrettierRecommended,
+  StylisticPlugin.configs['disable-legacy'],
+  StylisticPlugin.configs['recommended-flat'],
   eslintPluginUnicorn.configs['flat/recommended'],
   jsxA11y.flatConfigs.strict,
+  // @ts-ignore
   importPlugin.flatConfigs.recommended,
+  // @ts-ignore
   importPlugin.flatConfigs.typescript,
   {
     languageOptions: {
@@ -29,7 +31,6 @@ export default tseslint.config(
       'unused-imports': unusedImports,
     },
     rules: {
-      // TypeScript
       '@typescript-eslint/consistent-type-definitions': [2, 'type'], // Types are easier to manage
       '@typescript-eslint/explicit-member-accessibility': 1, // provide access modifiers
       '@typescript-eslint/no-misused-promises': 0, // Some callbacks ignore return type
@@ -105,6 +106,13 @@ export default tseslint.config(
       ],
       'import/newline-after-import': 1,
       'import/first': 1,
+
+      'unicorn/prefer-math-trunc': 0, // ~~ Is faster than Math.trunk (in Firefox and Safari)
+      /**
+       * Standart for loop is insanely faster than for of.
+       * For of uses iterators to loop, which is a significant overhead.
+       */
+      'unicorn/no-for-loop': 0,
     },
   },
 );
