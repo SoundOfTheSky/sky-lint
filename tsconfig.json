@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "${configDir}/src",
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "composite": true,
@@ -18,4 +19,5 @@
     "strict": true,
     "target": "esnext",
   },
+  "include": ["${configDir}/src"]
 }

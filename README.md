@@ -22,8 +22,8 @@ export default [
 - Very strict
 - TypeScript
 - Prettier
-- unused-imports
-- SonarJS (waiting for them to fix dependencies)
+- Unused imports
+- Unicorn
 
 ## TSConfig
 Create `tsconfig.json` and put 
