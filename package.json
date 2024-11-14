@@ -1,8 +1,7 @@
 {
   "name": "@softsky/configs",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "SoundOfTheSky's configs",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SoundOfTheSky/configs.git"
@@ -27,7 +26,8 @@
     "@stylistic/eslint-plugin": "^2.10.1",
     "@types/eslint__js": "^8.42.3",
     "eslint": "^9.14.0",
-    "eslint-plugin-import": "^2.31.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import-x": "^4.4.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-unicorn": "^56.0.0",
     "eslint-plugin-unused-imports": "^4.1.4",

@@ -1,12 +1,13 @@
 // @ts-check
 
-import eslint from '@eslint/js';
-import StylisticPlugin from '@stylistic/eslint-plugin';
-import * as importPlugin from 'eslint-plugin-import';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-import unusedImports from 'eslint-plugin-unused-imports';
-import tseslint from 'typescript-eslint';
+import eslint from '@eslint/js'
+import StylisticPlugin from '@stylistic/eslint-plugin'
+import tsParser from '@typescript-eslint/parser'
+import eslintPluginImportX from 'eslint-plugin-import-x'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import unusedImports from 'eslint-plugin-unused-imports'
+import tseslint from 'typescript-eslint'
 
 export default baseSeverityOnFixability(
   tseslint.config(
@@ -17,12 +18,15 @@ export default baseSeverityOnFixability(
     StylisticPlugin.configs['recommended-flat'],
     eslintPluginUnicorn.configs['flat/recommended'],
     jsxA11y.flatConfigs.strict,
-    // @ts-ignore
-    importPlugin.flatConfigs.recommended,
-    // @ts-ignore
-    importPlugin.flatConfigs.typescript,
+    eslintPluginImportX.flatConfigs.recommended,
+    eslintPluginImportX.flatConfigs.typescript,
     {
+      files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+      ignores: ['eslint.config.mjs'],
       languageOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        parser: tsParser,
         parserOptions: {
           projectService: true,
           tsconfigRootDir: import.meta.dirname,
@@ -67,8 +71,8 @@ export default baseSeverityOnFixability(
 
         'jsx-a11y/media-has-caption': 0, // Sometimes sound is just a sound but I belive that this is useful
 
-        'import/prefer-default-export': 1,
-        'import/order': [
+        'import-x/prefer-default-export': 1,
+        'import-x/order': [
           1,
           {
             groups: [
@@ -100,8 +104,10 @@ export default baseSeverityOnFixability(
             },
           },
         ],
-        'import/newline-after-import': 1,
-        'import/first': 1,
+        'import-x/newline-after-import': 1,
+        'import-x/first': 1,
+        'import-x/no-dynamic-require': 'warn',
+        'import-x/no-nodejs-modules': 'warn',
 
         'unicorn/prefer-math-trunc': 0, // ~~ Is faster than Math.trunk (in Firefox and Safari)
         /**
@@ -112,30 +118,30 @@ export default baseSeverityOnFixability(
       },
     },
   ),
-);
+)
 
 function baseSeverityOnFixability(configs) {
-  const plugins = {};
+  const plugins = {}
   for (const config of configs)
-    for (const name in config.plugins) plugins[name] = config.plugins[name];
+    for (const name in config.plugins) plugins[name] = config.plugins[name]
   for (const config of configs) {
-    if (!config.rules) continue;
+    if (!config.rules) continue
     for (const ruleName in config.rules) {
-      const slashIndex = ruleName.indexOf('/');
+      const slashIndex = ruleName.indexOf('/')
       const pluginName =
-        slashIndex === -1 ? 'eslint' : ruleName.slice(0, slashIndex);
+        slashIndex === -1 ? 'eslint' : ruleName.slice(0, slashIndex)
       const pluginRuleName =
-        slashIndex === -1 ? ruleName : ruleName.slice(slashIndex + 1);
+        slashIndex === -1 ? ruleName : ruleName.slice(slashIndex + 1)
       const severity = plugins[pluginName]?.rules?.[pluginRuleName]?.meta
         ?.fixable
         ? 1
-        : 2;
-      const rule = config.rules[ruleName];
+        : 2
+      const rule = config.rules[ruleName]
       if (Array.isArray(rule) && rule[0] !== 'off' && rule[0] !== 0)
-        rule[0] = severity;
+        rule[0] = severity
       else if (rule !== 'off' && rule !== 0)
-        config.rules = { ...config.rules, [ruleName]: severity };
+        config.rules = { ...config.rules, [ruleName]: severity }
     }
   }
-  return configs;
+  return configs
 }
